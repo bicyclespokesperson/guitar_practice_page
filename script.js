@@ -17,11 +17,11 @@ class GuitarPracticeApp {
     setupTheme() {
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = themeToggle.querySelector('.theme-icon');
-        
+
         // Check for saved theme preference or default to OS preference
         const savedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
+
         if (savedTheme) {
             document.documentElement.setAttribute('data-theme', savedTheme);
             themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
@@ -32,16 +32,16 @@ class GuitarPracticeApp {
             document.documentElement.setAttribute('data-theme', 'light');
             themeIcon.textContent = '🌙';
         }
-        
+
         themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
+
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
         });
-        
+
         // Listen for OS theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!localStorage.getItem('theme')) {
@@ -63,19 +63,19 @@ class GuitarPracticeApp {
     navigateToPage(page) {
         const pages = document.querySelectorAll('.page');
         const navTabs = document.querySelectorAll('.nav-tab');
-        
+
         pages.forEach(p => p.classList.remove('active'));
         navTabs.forEach(t => t.classList.remove('active'));
-        
+
         document.getElementById(page).classList.add('active');
         document.querySelector(`[data-page="${page}"]`).classList.add('active');
-        
+
         this.currentPage = page;
     }
 
     setupPracticeChecklist() {
         this.checkboxes = document.querySelectorAll('#practice input[type="checkbox"]');
-        
+
         this.checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 this.updateProgress();
@@ -98,7 +98,7 @@ class GuitarPracticeApp {
         const checkedCount = Array.from(this.checkboxes).filter(cb => cb.checked).length;
         const totalCount = this.checkboxes.length;
         const percentage = (checkedCount / totalCount) * 100;
-        
+
         const progressFill = document.querySelector('.progress-fill');
         progressFill.style.width = `${percentage}%`;
     }
@@ -138,14 +138,14 @@ class GuitarPracticeApp {
         const stringCount = 6;
         const fretCount = 12;
         const stringNames = ['e', 'B', 'G', 'D', 'A', 'E'];
-        
+
         // Create strings
         for (let string = 0; string < stringCount; string++) {
             const stringEl = document.createElement('div');
             stringEl.className = 'string';
             stringEl.style.top = `${30 + (string * 25)}px`;
             fretboard.appendChild(stringEl);
-            
+
             // Add string labels
             const labelEl = document.createElement('div');
             labelEl.className = 'string-label';
@@ -166,7 +166,7 @@ class GuitarPracticeApp {
             fretEl.className = 'fret';
             fretEl.style.left = `${20 + (fret * 45)}px`;
             fretboard.appendChild(fretEl);
-            
+
             // Add fret numbers
             const numberEl = document.createElement('div');
             numberEl.className = 'fret-number';
@@ -180,10 +180,10 @@ class GuitarPracticeApp {
         const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
         const strings = 6;
         const frets = 12;
-        
+
         const randomString = Math.floor(Math.random() * strings);
         const randomFret = Math.floor(Math.random() * frets) + 1;
-        
+
         const existingDot = document.querySelector('.note-dot');
         if (existingDot) {
             existingDot.remove();
@@ -193,7 +193,7 @@ class GuitarPracticeApp {
         dot.className = 'note-dot';
         dot.style.left = `${20 + (randomFret * 45) - 22.5}px`;
         dot.style.top = `${30 + (randomString * 25)}px`;
-        
+
         document.getElementById('fretboard-diagram').appendChild(dot);
     }
 
@@ -295,47 +295,37 @@ class GuitarPracticeApp {
     }
 
     async generateStandard() {
+        var standards;
         try {
             const response = await fetch('jazz-standards.txt');
             const text = await response.text();
-            const standards = text.trim().split('\n').filter(line => line.trim());
-            
-            const keys = ['C', 'D', 'Eb', 'F', 'G', 'A', 'Bb'];
-
-            const song = this.randomChoice(standards);
-            const key = this.randomChoice(keys);
-
-            this.displayResult('standards-result', {
-                title: song,
-                subtitle: `Key of ${key}`,
-                detail: 'Jazz Standard'
-            });
+            standards = text.trim().split('\n').filter(line => line.trim());
         } catch (error) {
             // Fallback to hardcoded list if file can't be loaded
-            const standards = [
+            standards = [
                 'Autumn Leaves',
                 'All The Things You Are',
                 'Blue Bossa',
                 'Summertime',
                 'Fly Me To The Moon'
             ];
-            const keys = ['C', 'D', 'Eb', 'F', 'G', 'A', 'Bb'];
-
-            const song = this.randomChoice(standards);
-            const key = this.randomChoice(keys);
-
-            this.displayResult('standards-result', {
-                title: song,
-                subtitle: `Key of ${key}`,
-                detail: 'Jazz Standard'
-            });
         }
+
+        const keys = ['C', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'A', 'Bb', 'B'];
+        const song = this.randomChoice(standards);
+        const key = this.randomChoice(keys);
+
+        this.displayResult('standards-result', {
+            title: song,
+            subtitle: `Key of ${key}`,
+            detail: 'Jazz Standard'
+        });
     }
 
     displayResult(elementId, content) {
         const resultEl = document.getElementById(elementId);
         resultEl.classList.add('has-content');
-        
+
         resultEl.innerHTML = `
             <div class="result-content">
                 <div class="result-title">${content.title}</div>
