@@ -19,20 +19,17 @@ A simple, elegant web application for tracking guitar practice sessions with int
 - **Jazz Standards**: Random song and key generator from classic repertoire
 - **Transcription**: Simple reminder page
 
+### Design Features
+- Light/dark mode with OS preference detection
+- Fully responsive design (desktop, tablet, mobile)
+- Modern interface with smooth animations
+- Touch-friendly controls
+
 ## Tech Stack
 
 - **Frontend**: Vanilla HTML, CSS, and JavaScript
-- **Styling**: CSS custom properties with modern design system
 - **Storage**: localStorage for practice session persistence
-- **Deployment**: GitHub Pages ready
-
-## Design Features
-
-- Modern, clean interface with purple/coral color scheme
-- Fully responsive design (desktop, tablet, mobile)
-- Smooth animations and micro-interactions
-- Touch-friendly buttons (48px minimum)
-- Accessible navigation with keyboard support
+- **Deployment**: GitHub Pages (auto-deploys on push to master)
 
 ## Local Development
 
@@ -42,21 +39,4 @@ A simple, elegant web application for tracking guitar practice sessions with int
 
 ## Deployment
 
-This site is designed for GitHub Pages deployment:
-
-1. Push to your GitHub repository
-2. Enable GitHub Pages in repository settings
-3. Select "Deploy from a branch" and choose `main` branch
-4. Your site will be available at `https://yourusername.github.io/guitar-practice`
-
-### Quick Deploy Script
-
-```bash
-npm run deploy
-```
-
-## Browser Compatibility
-
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-- Progressive enhancement ensures basic functionality in older browsers
+Pushing to the `master` branch automatically deploys the latest version via GitHub Pages.

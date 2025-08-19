@@ -7,12 +7,14 @@ This is a guitar practice tracking website built with vanilla HTML, CSS, and Jav
 ## Architecture
 
 ### Tech Stack
+
 - **Frontend**: Vanilla HTML/CSS/JavaScript (no build process)
 - **Storage**: localStorage for persistence
-- **Deployment**: GitHub Pages ready
+- **Deployment**: GitHub Pages (pushes to master branch deploy updates)
 - **Styling**: CSS custom properties with light/dark theme support
 
 ### File Structure
+
 ```
 /
 ├── index.html          # Main HTML with all page sections
@@ -26,12 +28,14 @@ This is a guitar practice tracking website built with vanilla HTML, CSS, and Jav
 ## Key Features
 
 ### 1. Practice Session Tracker
+
 - Interactive checklist with 7 practice areas
 - Visual progress bar that updates in real-time
 - localStorage persistence for session state
 - "Uncheck All" reset functionality
 
 ### 2. Interactive Fretboard
+
 - Visual guitar fretboard (12 frets, 6 strings)
 - Proper string labeling (EADGBe from bottom to top)
 - Random note position generator with animated dot
@@ -39,6 +43,7 @@ This is a guitar practice tracking website built with vanilla HTML, CSS, and Jav
 - Responsive scrolling on mobile
 
 ### 3. Random Generators
+
 - **Arpeggios**: Chord type + root + position
 - **7th Inversions**: Chord type + root
 - **Tanpura**: Key + scale/mode (including pentatonics)
@@ -46,6 +51,7 @@ This is a guitar practice tracking website built with vanilla HTML, CSS, and Jav
 - **Jazz Standards**: Song + key from curated list
 
 ### 4. Theme System
+
 - Light/dark mode toggle with OS preference detection
 - CSS custom properties for consistent theming
 - localStorage persistence for manual theme choice
@@ -54,19 +60,21 @@ This is a guitar practice tracking website built with vanilla HTML, CSS, and Jav
 ## Code Organization
 
 ### CSS Variables (style.css)
+
 ```css
 :root {
-    --primary: #6B46C1;      /* Purple for headers/active states */
-    --accent: #FF6B6B;       /* Coral for buttons */
-    --background: #FAFAF9;   /* Off-white background */
-    --text: #2D3748;         /* Charcoal text */
-    --success: #4ECDC4;      /* Mint for completed items */
-    --card-bg: white;        /* Card backgrounds */
-    /* ... */
+  --primary: #6b46c1; /* Purple for headers/active states */
+  --accent: #ff6b6b; /* Coral for buttons */
+  --background: #fafaf9; /* Off-white background */
+  --text: #2d3748; /* Charcoal text */
+  --success: #4ecdc4; /* Mint for completed items */
+  --card-bg: white; /* Card backgrounds */
+  /* ... */
 }
 ```
 
 ### JavaScript Classes (script.js)
+
 - `GuitarPracticeApp`: Main application class
 - Key methods:
   - `setupTheme()`: Theme toggle functionality
@@ -78,6 +86,7 @@ This is a guitar practice tracking website built with vanilla HTML, CSS, and Jav
 ## Development Notes
 
 ### Fretboard Implementation
+
 - Strings are positioned with 25px spacing
 - Frets use 45px spacing for realistic proportions
 - Note dots positioned between fret lines (not on them)
@@ -85,13 +94,16 @@ This is a guitar practice tracking website built with vanilla HTML, CSS, and Jav
 - Fret height: 125px (spans all strings cleanly)
 
 ### Theme Toggle Logic
+
 - Always sets `data-theme` attribute on load
 - Detects OS preference via `prefers-color-scheme`
 - Manual override saves to localStorage
 - Icons: 🌙 (light mode) ↔ ☀️ (dark mode)
 
 ### Random Generators
+
 All use `randomChoice()` helper method for array selection:
+
 ```javascript
 randomChoice(array) {
     return array[Math.floor(Math.random() * array.length)];
@@ -101,17 +113,19 @@ randomChoice(array) {
 ## Testing Commands
 
 Since this is a static site with no build process:
+
 - **Local development**: Open `index.html` in browser
-- **Deploy**: `npm run deploy` (pushes to GitHub Pages)
 
 ## Responsive Design
 
 ### Breakpoints
+
 - **Desktop**: 800px max-width container
 - **Tablet**: `@media (max-width: 768px)`
 - **Mobile**: `@media (max-width: 480px)`
 
 ### Mobile Adaptations
+
 - Navigation tabs scroll horizontally
 - Header stacks vertically (title above theme toggle)
 - Buttons become full-width
@@ -138,19 +152,25 @@ Since this is a static site with no build process:
 ## Common Maintenance Tasks
 
 ### Adding New Scales/Modes
+
 Edit the `modes` array in `generateTanpura()`:
+
 ```javascript
-const modes = ['Major', 'Dorian', /* ... */, 'New Mode'];
+const modes = ["Major", "Dorian" /* ... */, , "New Mode"];
 ```
 
 ### Adding New Jazz Standards
+
 Edit the `standards` array in `generateStandard()`:
+
 ```javascript
-const standards = ['Autumn Leaves', /* ... */, 'New Song'];
+const standards = ["Autumn Leaves" /* ... */, , "New Song"];
 ```
 
 ### Theme Color Updates
+
 Modify CSS custom properties in `:root` and `[data-theme="dark"]` selectors.
 
 ### Mobile Responsive Adjustments
+
 Update the media query sections at the bottom of `style.css`.
