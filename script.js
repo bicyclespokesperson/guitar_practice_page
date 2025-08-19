@@ -294,24 +294,42 @@ class GuitarPracticeApp {
         });
     }
 
-    generateStandard() {
-        const standards = [
-            'Autumn Leaves',
-            'All The Things You Are',
-            'Blue Bossa',
-            'Summertime',
-            'Fly Me To The Moon'
-        ];
-        const keys = ['C', 'D', 'Eb', 'F', 'G', 'A', 'Bb'];
+    async generateStandard() {
+        try {
+            const response = await fetch('jazz-standards.txt');
+            const text = await response.text();
+            const standards = text.trim().split('\n').filter(line => line.trim());
+            
+            const keys = ['C', 'D', 'Eb', 'F', 'G', 'A', 'Bb'];
 
-        const song = this.randomChoice(standards);
-        const key = this.randomChoice(keys);
+            const song = this.randomChoice(standards);
+            const key = this.randomChoice(keys);
 
-        this.displayResult('standards-result', {
-            title: song,
-            subtitle: `Key of ${key}`,
-            detail: 'Jazz Standard'
-        });
+            this.displayResult('standards-result', {
+                title: song,
+                subtitle: `Key of ${key}`,
+                detail: 'Jazz Standard'
+            });
+        } catch (error) {
+            // Fallback to hardcoded list if file can't be loaded
+            const standards = [
+                'Autumn Leaves',
+                'All The Things You Are',
+                'Blue Bossa',
+                'Summertime',
+                'Fly Me To The Moon'
+            ];
+            const keys = ['C', 'D', 'Eb', 'F', 'G', 'A', 'Bb'];
+
+            const song = this.randomChoice(standards);
+            const key = this.randomChoice(keys);
+
+            this.displayResult('standards-result', {
+                title: song,
+                subtitle: `Key of ${key}`,
+                detail: 'Jazz Standard'
+            });
+        }
     }
 
     displayResult(elementId, content) {

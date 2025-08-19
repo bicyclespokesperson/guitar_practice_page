@@ -20,6 +20,7 @@ This is a guitar practice tracking website built with vanilla HTML, CSS, and Jav
 ├── index.html          # Main HTML with all page sections
 ├── style.css           # Complete styling with theme support
 ├── script.js           # All JavaScript functionality
+├── jazz-standards.txt  # Editable list of jazz standards
 ├── package.json        # NPM scripts for deployment
 ├── README.md           # User documentation
 └── CLAUDE.md          # This file
@@ -161,11 +162,16 @@ const modes = ["Major", "Dorian" /* ... */, , "New Mode"];
 
 ### Adding New Jazz Standards
 
-Edit the `standards` array in `generateStandard()`:
+Simply edit the `jazz-standards.txt` file - add one song per line:
 
-```javascript
-const standards = ["Autumn Leaves" /* ... */, , "New Song"];
 ```
+Autumn Leaves
+All The Things You Are
+Your New Song
+Another Song
+```
+
+The app loads this file dynamically and falls back to a hardcoded list if the file can't be loaded.
 
 ### Theme Color Updates
 
