@@ -1,0 +1,13 @@
+{
+  "name": "guitar-practice-tracker",
+  "version": "1.0.0",
+  "description": "A simple guitar practice tracking website",
+  "main": "index.html",
+  "scripts": {
+    "start": "open index.html",
+    "deploy": "git push origin main"
+  },
+  "keywords": ["guitar", "practice", "music", "tracker"],
+  "author": "",
+  "license": "MIT"
+}
